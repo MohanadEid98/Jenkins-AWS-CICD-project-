@@ -1,32 +1,17 @@
 pipeline {
     agent any
 
-    options {
-        skipDefaultCheckout(true)
-    }
-
     stages {
-
-        stage('Checkout') {
-            steps {
-                deleteDir()
-                checkout scm
-
-                sh 'ls -la'
-                sh 'ls -la backend'
-                sh 'ls -la frontend'
-            }
-        }
 
         stage('Build Backend Image') {
             steps {
-                sh 'docker build -t devops-backend:1.0 ./backend'
+                sh 'docker build -t devops-backend:1.0 ./app/backend'
             }
         }
 
         stage('Build Frontend Image') {
             steps {
-                sh 'docker build -t devops-frontend:1.0 ./frontend'
+                sh 'docker build -t devops-frontend:1.0 ./app/frontend'
             }
         }
 
